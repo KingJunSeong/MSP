@@ -65,7 +65,7 @@ namespace MSP.Forms
             }
             MessageBox.Show("시간이 다소 소요될 수 있습니다. . .\n확인 버튼을 누르면 시작합니다.");
 
-            APIFileScan(hash);
+            Task task = APIFileScan(hash);
             
         }
 
