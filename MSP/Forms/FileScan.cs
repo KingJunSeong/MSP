@@ -1,9 +1,12 @@
-﻿using System;
+﻿using MSP.Utils;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,7 +51,8 @@ namespace MSP.Forms
             {
                 textbox_filePath.Text = openfile.FileName;
                 textbox_filePath.Enabled = false;
-                hash = Utils.FileHash.Getmd5FromFiles(openfile.FileName);
+                hash = FileHash.Getmd5FromFiles(openfile.FileName);
+                label3.Text = "MD5 : " + FileHash.Getmd5FromFiles(textbox_filePath.Text);
             }
         }
 
@@ -61,7 +65,37 @@ namespace MSP.Forms
             }
             MessageBox.Show("시간이 다소 소요될 수 있습니다. . .\n확인 버튼을 누르면 시작합니다.");
 
-            Utils.FileScan.APIFileScan(hash);
+            APIFileScan(hash);
+            
+        }
+
+        public async Task APIFileScan(string hash)
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"https://www.virustotal.com/api/v3/files/{hash}"),
+                Headers =
+                {
+                    { "accept", "application/json" },
+                    { "x-apikey", $"{APIKey.apikey}" },
+                },
+            };
+            using var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+
+            var analysis_id = JObject.Parse(body)?["data"]?["attributes"]?["last_analysis_results"];
+            var engine_name = analysis_id?
+                .Values<JProperty>()
+                .Where(v => v?.Value["category"]?.ToString() == "malicious")
+                .Select(v => v?.Value["engine_name"]?.ToString());
+            var malware = analysis_id?.Count();
+            var malwareCount = engine_name.Count();
+
+            label_virus_count.Text = malwareCount.ToString();
+            label_engine_count.Text = malware.ToString();
         }
     }
 }

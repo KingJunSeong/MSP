@@ -35,6 +35,7 @@
             this.label_engine_count = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_virus_count = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -70,7 +71,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("굴림", 16F);
-            this.label1.Location = new System.Drawing.Point(26, 132);
+            this.label1.Location = new System.Drawing.Point(12, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(192, 27);
             this.label1.TabIndex = 4;
@@ -80,7 +81,7 @@
             // 
             this.label_engine_count.AutoSize = true;
             this.label_engine_count.Font = new System.Drawing.Font("굴림", 16F);
-            this.label_engine_count.Location = new System.Drawing.Point(224, 132);
+            this.label_engine_count.Location = new System.Drawing.Point(210, 88);
             this.label_engine_count.Name = "label_engine_count";
             this.label_engine_count.Size = new System.Drawing.Size(0, 27);
             this.label_engine_count.TabIndex = 5;
@@ -89,7 +90,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("굴림", 16F);
-            this.label2.Location = new System.Drawing.Point(26, 170);
+            this.label2.Location = new System.Drawing.Point(12, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(192, 27);
             this.label2.TabIndex = 6;
@@ -99,16 +100,27 @@
             // 
             this.label_virus_count.AutoSize = true;
             this.label_virus_count.Font = new System.Drawing.Font("굴림", 16F);
-            this.label_virus_count.Location = new System.Drawing.Point(224, 170);
+            this.label_virus_count.Location = new System.Drawing.Point(210, 52);
             this.label_virus_count.Name = "label_virus_count";
             this.label_virus_count.Size = new System.Drawing.Size(0, 27);
             this.label_virus_count.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("굴림", 12F);
+            this.label3.Location = new System.Drawing.Point(13, 128);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Hash";
             // 
             // FileScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 346);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label_virus_count);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label_engine_count);
@@ -132,5 +144,6 @@
         private System.Windows.Forms.Label label_engine_count;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_virus_count;
+        private System.Windows.Forms.Label label3;
     }
 }
