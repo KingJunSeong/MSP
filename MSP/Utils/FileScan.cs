@@ -37,16 +37,7 @@ namespace MSP.Utils
             var malware = analysis_id?.Count();
             var malwareCount = engine_name.Count();
 
-            virusCount(malware.ToString());
-            engine_Count(malwareCount.ToString());
-        }
-        public static string virusCount(string count)
-        {
-            return count;
-        }
-        public static string engine_Count(string count)
-        {
-            return count;
+            
         }
     }
 }
