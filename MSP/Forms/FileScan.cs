@@ -63,15 +63,5 @@ namespace MSP.Forms
 
             Utils.FileScan.APIFileScan(hash);
         }
-
-        public void virusCount()
-        {
-            string count = Utils.FileScan.virusCount;
-            
-        }
-        public void engineCount(string count)
-        {
-            label_engine_count.Text = count;
-        }
     }
 }
