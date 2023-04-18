@@ -92,6 +92,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\APIKey.cs" />
+    <Compile Include="Utils\fileAccessCheck.cs" />
     <Compile Include="Utils\FileHash.cs" />
     <Compile Include="Utils\ThemeColor.cs" />
     <Compile Include="Utils\urlCheck.cs" />

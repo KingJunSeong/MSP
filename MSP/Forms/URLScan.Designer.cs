@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 346);
+            this.ClientSize = new System.Drawing.Size(744, 351);
             this.Controls.Add(this.label_virus_count);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label_engine_count);

@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -49,10 +50,16 @@ namespace MSP.Forms
             };
             if(openfile.ShowDialog() == DialogResult.OK)
             {
+                if (!fileAccessCheck.IsAccessAble(openfile.FileName))
+                {
+                    MessageBox.Show("File is in use by another process Please end it");
+                    textbox_filePath.Text = "";
+                    return;
+                }
                 textbox_filePath.Text = openfile.FileName;
                 textbox_filePath.Enabled = false;
                 hash = FileHash.Getmd5FromFiles(openfile.FileName);
-                label3.Text = "MD5 : " + FileHash.Getmd5FromFiles(textbox_filePath.Text);
+                label_hash.Text = "MD5 : " + FileHash.Getmd5FromFiles(textbox_filePath.Text);
             }
         }
 
@@ -60,10 +67,10 @@ namespace MSP.Forms
         {
             if(textbox_filePath.Text == string.Empty)
             {
-                MessageBox.Show("파일을 먼저 선택하여 주세요!");
+                MessageBox.Show("Please select a file first");
                 return;
             }
-            MessageBox.Show("시간이 다소 소요될 수 있습니다. . .\n확인 버튼을 누르면 시작합니다.");
+            MessageBox.Show("This may take some time. Press the .\nOK button to start.");
 
             Task task = APIFileScan(hash); 
         }
@@ -85,6 +92,7 @@ namespace MSP.Forms
             response.EnsureSuccessStatusCode();
             var body = await response.Content.ReadAsStringAsync();
 
+            var analysis_stats = JObject.Parse(body)?["data"]?["attributes"]?["last_analysis_stats"];
             var analysis_id = JObject.Parse(body)?["data"]?["attributes"]?["last_analysis_results"];
             var engine_name = analysis_id?
                 .Values<JProperty>()
@@ -93,8 +101,23 @@ namespace MSP.Forms
             var malware = analysis_id?.Count();
             var malwareCount = engine_name.Count();
 
-            label_virus_count.Text = malwareCount.ToString();
-            label_engine_count.Text = malware.ToString();
+            var harmless = analysis_stats["harmless"].ToString();
+            var typeunsupported = analysis_stats["type-unsupported"].ToString();
+            var suspicious = analysis_stats["suspicious"].ToString();
+            var confirmedtimeout = analysis_stats["confirmed-timeout"].ToString();
+            var timeout = analysis_stats["timeout"].ToString();
+            var failure = analysis_stats["failure"].ToString();
+            var malicious = analysis_stats["malicious"].ToString();
+            var harundetectedmless = analysis_stats["undetected"].ToString();
+
+            label1.Text = "harmless : " + harmless;
+            label2.Text = "type-unsupported : " + typeunsupported;
+            label3.Text = "suspicious : " + suspicious;
+            label4.Text = "confirmed-timeout : " + confirmedtimeout;
+            label5.Text = "timeout : " + timeout;
+            label6.Text = "failure : " + failure;
+            label7.Text = "malicious : " + malicious;
+            label8.Text = "undetected : " + harundetectedmless;
         }
     }
 }
