@@ -8,6 +8,6 @@ namespace MSP.Utils
 {
     public class APIKey
     {
-        public static string apikey = "api key here";
+        public static string apikey = "YOUR VIRUSTOTAL API KEY HERE";
     }
 }
