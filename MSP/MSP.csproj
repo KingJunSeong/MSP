@@ -94,6 +94,8 @@
     <Compile Include="Utils\APIKey.cs" />
     <Compile Include="Utils\FileHash.cs" />
     <Compile Include="Utils\ThemeColor.cs" />
+    <Compile Include="Utils\urlCheck.cs" />
+    <Compile Include="Utils\urlEncoding.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

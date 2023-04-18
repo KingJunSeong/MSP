@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSP.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,6 +34,21 @@ namespace MSP.Forms
         private void URLScan_Load(object sender, EventArgs e)
         {
             LoadTheme();
+        }
+
+        private void btn_ScanStart_Click(object sender, EventArgs e)
+        {
+            if(textbox_url.Text == "")
+            {
+                MessageBox.Show("URL을 입력해주세요!");
+                return;
+            }
+            if (!urlCheck.IsUrl(textbox_url.Text))
+            {
+                MessageBox.Show("URL형식이 올바르지 않아요!");
+                return;
+            }
+            MessageBox.Show(urlEncoding.UrlEncode(textbox_url.Text));
         }
     }
 }
