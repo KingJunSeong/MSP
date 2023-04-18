@@ -17,6 +17,11 @@ namespace MSP
         private Random random;
         private int tempIndex;
         private Form activeForm;
+
+        Forms.Home home = new Forms.Home();
+        Forms.FileScan fileScan = new Forms.FileScan();
+        Forms.Setting setting = new Forms.Setting();
+        Forms.URLScan urlScan = new Forms.URLScan();
         public Form1()
         {
             InitializeComponent();
@@ -80,7 +85,7 @@ namespace MSP
         {
             if(activeForm != null)
             {
-                activeForm.Close();
+                activeForm.Hide();
             }
             ActivateButton(btnSender);
             activeForm = childForm;
@@ -92,25 +97,24 @@ namespace MSP
             childForm.Show();
             lbl_Title.Text = childForm.Text;
         }
-
         private void btn_Home_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Home(), sender);
+            OpenChildForm(home, sender);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FileScan(), sender);
+            OpenChildForm(fileScan, sender);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.URLScan(), sender);
+            OpenChildForm(urlScan, sender);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Setting(), sender);
+            OpenChildForm(setting, sender);
         }
 
         private void Form1_Load(object sender, EventArgs e)

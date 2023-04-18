@@ -70,7 +70,7 @@ namespace MSP.Forms
                 return;
             }
             MessageBox.Show("This may take some time. Press the .\nOK button to start.");
-
+            label_result.Text = "Scaning...";
             Task task = APIFileScan(hash); 
         }
 
@@ -117,6 +117,7 @@ namespace MSP.Forms
             label6.Text = "failure : " + failure;
             label7.Text = "malicious : " + malicious;
             label8.Text = "undetected : " + harundetectedmless;
+            label_result.Text = "Scan Success!";
         }
     }
 }
