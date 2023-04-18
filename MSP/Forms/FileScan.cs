@@ -53,7 +53,6 @@ namespace MSP.Forms
                 if (!fileAccessCheck.IsAccessAble(openfile.FileName))
                 {
                     MessageBox.Show("File is in use by another process Please end it");
-                    textbox_filePath.Text = "";
                     return;
                 }
                 textbox_filePath.Text = openfile.FileName;
