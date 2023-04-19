@@ -97,6 +97,7 @@
     <Compile Include="Utils\ThemeColor.cs" />
     <Compile Include="Utils\urlCheck.cs" />
     <Compile Include="Utils\urlEncoding.cs" />
+    <Compile Include="VirustotalResponse.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -28,51 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_virus_count = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label_engine_count = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btn_ScanStart = new System.Windows.Forms.Button();
             this.textbox_url = new System.Windows.Forms.TextBox();
+            this.label_result = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label_virus_count
-            // 
-            this.label_virus_count.AutoSize = true;
-            this.label_virus_count.Font = new System.Drawing.Font("굴림", 16F);
-            this.label_virus_count.Location = new System.Drawing.Point(210, 52);
-            this.label_virus_count.Name = "label_virus_count";
-            this.label_virus_count.Size = new System.Drawing.Size(0, 27);
-            this.label_virus_count.TabIndex = 15;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("굴림", 16F);
-            this.label2.Location = new System.Drawing.Point(12, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(192, 27);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "위협 감지 수 : ";
-            // 
-            // label_engine_count
-            // 
-            this.label_engine_count.AutoSize = true;
-            this.label_engine_count.Font = new System.Drawing.Font("굴림", 16F);
-            this.label_engine_count.Location = new System.Drawing.Point(210, 88);
-            this.label_engine_count.Name = "label_engine_count";
-            this.label_engine_count.Size = new System.Drawing.Size(0, 27);
-            this.label_engine_count.TabIndex = 13;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("굴림", 16F);
-            this.label1.Location = new System.Drawing.Point(12, 88);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 27);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "검사 엔진 수 : ";
             // 
             // btn_ScanStart
             // 
@@ -92,14 +56,69 @@
             this.textbox_url.Size = new System.Drawing.Size(720, 25);
             this.textbox_url.TabIndex = 10;
             // 
+            // label_result
+            // 
+            this.label_result.AutoSize = true;
+            this.label_result.Location = new System.Drawing.Point(9, 112);
+            this.label_result.Name = "label_result";
+            this.label_result.Size = new System.Drawing.Size(0, 15);
+            this.label_result.TabIndex = 26;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 168);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 15);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "suspicious : ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 244);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 15);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "undetected : ";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 219);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 15);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "malicious : ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 193);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 15);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "timeout : ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 15);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "harmless : ";
+            // 
             // URLScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 351);
-            this.Controls.Add(this.label_virus_count);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label_engine_count);
+            this.Controls.Add(this.label_result);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_ScanStart);
             this.Controls.Add(this.textbox_url);
@@ -112,11 +131,13 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label_virus_count;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label_engine_count;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_ScanStart;
         private System.Windows.Forms.TextBox textbox_url;
+        private System.Windows.Forms.Label label_result;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label1;
     }
 }

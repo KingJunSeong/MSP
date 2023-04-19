@@ -1,4 +1,6 @@
-﻿using MSP.Utils;
+﻿using MSP.JsonObject;
+using MSP.Utils;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace MSP.Forms
         }
         private void LoadTheme()
         {
-            foreach(Control btns in this.Controls)
+            foreach(Control btns in Controls)
             {
                 if(btns.GetType() == typeof(Button))
                 {
@@ -39,6 +41,7 @@ namespace MSP.Forms
         {
             LoadTheme();
             textbox_filePath.Enabled = false;
+            button3.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,6 +62,7 @@ namespace MSP.Forms
                 textbox_filePath.Enabled = false;
                 hash = FileHash.Getmd5FromFiles(openfile.FileName);
                 label_hash.Text = "MD5 : " + FileHash.Getmd5FromFiles(textbox_filePath.Text);
+                button3.Enabled = true;
             }
         }
 
@@ -91,6 +95,9 @@ namespace MSP.Forms
             response.EnsureSuccessStatusCode();
             var body = await response.Content.ReadAsStringAsync();
 
+            var res = JsonConvert.DeserializeObject<FileResponse>(body);
+            var stats = res.Data.Attributes.LastAnalysisStats;
+
             var analysis_stats = JObject.Parse(body)?["data"]?["attributes"]?["last_analysis_stats"];
             var analysis_id = JObject.Parse(body)?["data"]?["attributes"]?["last_analysis_results"];
             var engine_name = analysis_id?
@@ -100,24 +107,21 @@ namespace MSP.Forms
             var malware = analysis_id?.Count();
             var malwareCount = engine_name.Count();
 
-            var harmless = analysis_stats["harmless"].ToString();
-            var typeunsupported = analysis_stats["type-unsupported"].ToString();
-            var suspicious = analysis_stats["suspicious"].ToString();
-            var confirmedtimeout = analysis_stats["confirmed-timeout"].ToString();
-            var timeout = analysis_stats["timeout"].ToString();
-            var failure = analysis_stats["failure"].ToString();
-            var malicious = analysis_stats["malicious"].ToString();
-            var harundetectedmless = analysis_stats["undetected"].ToString();
-
-            label1.Text = "harmless : " + harmless;
-            label2.Text = "type-unsupported : " + typeunsupported;
-            label3.Text = "suspicious : " + suspicious;
-            label4.Text = "confirmed-timeout : " + confirmedtimeout;
-            label5.Text = "timeout : " + timeout;
-            label6.Text = "failure : " + failure;
-            label7.Text = "malicious : " + malicious;
-            label8.Text = "undetected : " + harundetectedmless;
+            label1.Text = "harmless : " + stats.Harmless;
+            label2.Text = "type-unsupported : " + stats.TypeUnsupported;
+            label3.Text = "suspicious : " + stats.Suspicious;
+            label4.Text = "confirmed-timeout : " + stats.ConfirmedTimeout;
+            label5.Text = "timeout : " + stats.Timeout;
+            label6.Text = "failure : " + stats.Failure;
+            label7.Text = "malicious : " + stats.Malicious;
+            label8.Text = "undetected : " + stats.Undetected;
             label_result.Text = "Scan Success!";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(FileHash.Getmd5FromFiles(textbox_filePath.Text));
+            MessageBox.Show("Copyed!");
         }
     }
 }

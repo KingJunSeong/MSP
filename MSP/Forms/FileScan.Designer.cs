@@ -41,6 +41,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label_result = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -159,16 +160,27 @@
             // label_result
             // 
             this.label_result.AutoSize = true;
-            this.label_result.Location = new System.Drawing.Point(9, 80);
+            this.label_result.Location = new System.Drawing.Point(12, 112);
             this.label_result.Name = "label_result";
             this.label_result.Size = new System.Drawing.Size(0, 15);
             this.label_result.TabIndex = 17;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(12, 66);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(89, 29);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "Copy Hash";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // FileScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 351);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label_result);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label8);
@@ -204,5 +216,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_result;
+        private System.Windows.Forms.Button button3;
     }
 }
