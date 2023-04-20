@@ -74,7 +74,7 @@ namespace MSP.Forms
                 return;
             }
             MessageBox.Show("This may take some time. Press the .\nOK button to start.");
-            label_result.Text = "Scaning...";
+            label_result.Text = "Scanning...";
             Task task = APIFileScan(hash); 
         }
 

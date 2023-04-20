@@ -195,7 +195,7 @@
             this.Controls.Add(this.textbox_filePath);
             this.Controls.Add(this.button1);
             this.Name = "FileScan";
-            this.Text = "File Scan";
+            this.Text = "FileScan";
             this.Load += new System.EventHandler(this.FileScan_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
