@@ -1,18 +1,12 @@
 ﻿using MSP.JsonObject;
 using MSP.Utils;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MSP.Forms
 {
@@ -25,9 +19,9 @@ namespace MSP.Forms
         }
         private void LoadTheme()
         {
-            foreach(Control btns in Controls)
+            foreach (Control btns in Controls)
             {
-                if(btns.GetType() == typeof(Button))
+                if (btns.GetType() == typeof(Button))
                 {
                     Button btn = (Button)btns;
                     btn.BackColor = ThemeColor.PrimaryColor;
@@ -51,7 +45,7 @@ namespace MSP.Forms
                 Filter = "All Files | *.*",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
             };
-            if(openfile.ShowDialog() == DialogResult.OK)
+            if (openfile.ShowDialog() == DialogResult.OK)
             {
                 if (!fileAccessCheck.IsAccessAble(openfile.FileName))
                 {
@@ -68,14 +62,14 @@ namespace MSP.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(textbox_filePath.Text == string.Empty)
+            if (textbox_filePath.Text == string.Empty)
             {
                 MessageBox.Show("Please select a file first");
                 return;
             }
             MessageBox.Show("This may take some time. Press the .\nOK button to start.");
             label_result.Text = "Scanning...";
-            Task task = APIFileScan(hash); 
+            Task task = APIFileScan(hash);
         }
 
         public async Task APIFileScan(string hash)
@@ -94,18 +88,8 @@ namespace MSP.Forms
             using var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var body = await response.Content.ReadAsStringAsync();
-
             var res = JsonConvert.DeserializeObject<FileResponse>(body);
             var stats = res.Data.Attributes.LastAnalysisStats;
-
-            var analysis_stats = JObject.Parse(body)?["data"]?["attributes"]?["last_analysis_stats"];
-            var analysis_id = JObject.Parse(body)?["data"]?["attributes"]?["last_analysis_results"];
-            var engine_name = analysis_id?
-                .Values<JProperty>()
-                .Where(v => v?.Value["category"]?.ToString() == "malicious")
-                .Select(v => v?.Value["engine_name"]?.ToString());
-            var malware = analysis_id?.Count();
-            var malwareCount = engine_name.Count();
 
             label1.Text = "harmless : " + stats.Harmless;
             label2.Text = "type-unsupported : " + stats.TypeUnsupported;
@@ -116,12 +100,40 @@ namespace MSP.Forms
             label7.Text = "malicious : " + stats.Malicious;
             label8.Text = "undetected : " + stats.Undetected;
             label_result.Text = "Scan Success!";
+
+            DrawPieChart(chart1, (int)stats.Harmless, (int)stats.TypeUnsupported, (int)stats.Suspicious, (int)stats.ConfirmedTimeout, (int)stats.Timeout, (int)stats.Failure, (int)stats.Malicious, (int)stats.Undetected);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(FileHash.Getmd5FromFiles(textbox_filePath.Text));
             MessageBox.Show("Copyed!");
+        }
+
+        private void DrawPieChart(Chart chart, int value1, int value2, int value3, int value4, int value5, int value6, int value7, int value8)
+        {
+
+            chart.Series.Clear();
+            chart.Legends.Clear();
+            chart.Legends.Add("MyLegend");
+            chart.Legends[0].LegendStyle = LegendStyle.Table;
+            chart.Legends[0].Docking = Docking.Right;
+            chart.Legends[0].Alignment = StringAlignment.Center;
+            chart.Legends[0].BorderColor = Color.Black;
+
+            string seriesname = "MySeriesName";
+            chart.Series.Add(seriesname);
+
+            chart.Series[seriesname].ChartType = SeriesChartType.Pie;
+
+            if (0 < value1) chart.Series[seriesname].Points.AddXY("harmless", value1);
+            if (0 < value2) chart.Series[seriesname].Points.AddXY("type-unsupported", value2);
+            if (0 < value3) chart.Series[seriesname].Points.AddXY("suspicious", value3);
+            if (0 < value4) chart.Series[seriesname].Points.AddXY("confirmed-timeout", value4);
+            if (0 < value5) chart.Series[seriesname].Points.AddXY("timeout", value5);
+            if (0 < value6) chart.Series[seriesname].Points.AddXY("failure", value6);
+            if (0 < value7) chart.Series[seriesname].Points.AddXY("malicious", value7);
+            if (0 < value8) chart.Series[seriesname].Points.AddXY("undetected", value8); 
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.button1 = new System.Windows.Forms.Button();
             this.textbox_filePath = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -42,6 +43,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label_result = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -175,11 +178,23 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // chart1
+            // 
+            this.chart1.BackColor = System.Drawing.SystemColors.Control;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Location = new System.Drawing.Point(268, 101);
+            this.chart1.Name = "chart1";
+            this.chart1.Size = new System.Drawing.Size(464, 238);
+            this.chart1.TabIndex = 19;
+            this.chart1.Text = "chart1";
+            // 
             // FileScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 351);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label_result);
             this.Controls.Add(this.label3);
@@ -197,6 +212,7 @@
             this.Name = "FileScan";
             this.Text = "FileScan";
             this.Load += new System.EventHandler(this.FileScan_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,5 +233,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_result;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

@@ -164,9 +164,6 @@ namespace MSP.JsonObject
 
     public partial class LastAnalysisResult
     {
-        [JsonProperty("category")]
-        public Category Category { get; set; }
-
         [JsonProperty("engine_name")]
         public string EngineName { get; set; }
 
@@ -180,8 +177,7 @@ namespace MSP.JsonObject
         public Method Method { get; set; }
 
         [JsonProperty("engine_update")]
-        [JsonConverter(typeof(ParseStringConverter))]
-        public long EngineUpdate { get; set; }
+        public string EngineUpdate { get; set; }
     }
 
     public partial class LastAnalysisStats
@@ -375,8 +371,6 @@ namespace MSP.JsonObject
 
     public partial class Lastline
     {
-        [JsonProperty("category")]
-        public Category Category { get; set; }
 
         [JsonProperty("sandbox_name")]
         public string SandboxName { get; set; }
@@ -387,8 +381,6 @@ namespace MSP.JsonObject
 
     public partial class Zenbox
     {
-        [JsonProperty("category")]
-        public Category Category { get; set; }
 
         [JsonProperty("confidence")]
         public long Confidence { get; set; }
@@ -504,7 +496,7 @@ namespace MSP.JsonObject
         public string ParentCommandLine { get; set; }
 
         [JsonProperty("UtcTime", NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset? UtcTime { get; set; }
+        public ulong? UtcTime { get; set; }
 
         [JsonProperty("RuleName", NullValueHandling = NullValueHandling.Ignore)]
         public string RuleName { get; set; }
@@ -561,7 +553,6 @@ namespace MSP.JsonObject
         public Uri Self { get; set; }
     }
 
-    public enum Category { Malicious, TypeUnsupported, Undetected };
 
     public enum Method { Blacklist };
 
@@ -577,59 +568,12 @@ namespace MSP.JsonObject
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                CategoryConverter.Singleton,
                 MethodConverter.Singleton,
                 FiletypeConverter.Singleton,
                 LangConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
-    }
-
-    internal class CategoryConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(Category) || t == typeof(Category?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "malicious":
-                    return Category.Malicious;
-                case "type-unsupported":
-                    return Category.TypeUnsupported;
-                case "undetected":
-                    return Category.Undetected;
-            }
-            throw new Exception("Cannot unmarshal type Category");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (Category)untypedValue;
-            switch (value)
-            {
-                case Category.Malicious:
-                    serializer.Serialize(writer, "malicious");
-                    return;
-                case Category.TypeUnsupported:
-                    serializer.Serialize(writer, "type-unsupported");
-                    return;
-                case Category.Undetected:
-                    serializer.Serialize(writer, "undetected");
-                    return;
-            }
-            throw new Exception("Cannot marshal type Category");
-        }
-
-        public static readonly CategoryConverter Singleton = new CategoryConverter();
     }
 
     internal class ParseStringConverter : JsonConverter
