@@ -13,6 +13,7 @@ namespace MSP.Forms
     public partial class FileScan : Form
     {
         public string hash;
+        public string filenames;
         public FileScan()
         {
             InitializeComponent();
@@ -35,7 +36,6 @@ namespace MSP.Forms
         {
             LoadTheme();
             textbox_filePath.Enabled = false;
-            button3.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,8 +55,10 @@ namespace MSP.Forms
                 textbox_filePath.Text = openfile.FileName;
                 textbox_filePath.Enabled = false;
                 hash = FileHash.Getmd5FromFiles(openfile.FileName);
-                label_hash.Text = "MD5 : " + FileHash.Getmd5FromFiles(textbox_filePath.Text);
-                button3.Enabled = true;
+                filenames = openfile.SafeFileName;
+                textbox_md5.Text = FileHash.Getmd5FromFiles(textbox_filePath.Text);
+                textbox_sha1.Text = FileHash.Getsha1FromFiles(textbox_filePath.Text);
+                textbox_sha256.Text = FileHash.Getsha256FromFiles(textbox_filePath.Text);
             }
         }
 
