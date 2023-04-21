@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.btn_ScanStart = new System.Windows.Forms.Button();
             this.textbox_url = new System.Windows.Forms.TextBox();
             this.label_result = new System.Windows.Forms.Label();
@@ -36,6 +37,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_ScanStart
@@ -109,11 +112,23 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "harmless : ";
             // 
+            // chart1
+            // 
+            this.chart1.BackColor = System.Drawing.SystemColors.Control;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Location = new System.Drawing.Point(268, 101);
+            this.chart1.Name = "chart1";
+            this.chart1.Size = new System.Drawing.Size(464, 238);
+            this.chart1.TabIndex = 27;
+            this.chart1.Text = "chart1";
+            // 
             // URLScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 351);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.label_result);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label8);
@@ -125,6 +140,7 @@
             this.Name = "URLScan";
             this.Text = "URL Scan";
             this.Load += new System.EventHandler(this.URLScan_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,5 +155,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

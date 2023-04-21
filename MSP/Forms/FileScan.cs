@@ -88,20 +88,27 @@ namespace MSP.Forms
             using var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var body = await response.Content.ReadAsStringAsync();
-            var res = JsonConvert.DeserializeObject<FileResponse>(body);
-            var stats = res.Data.Attributes.LastAnalysisStats;
+            try
+            {
+                var res = JsonConvert.DeserializeObject<FileResponse>(body);
+                var stats = res.Data.Attributes.LastAnalysisStats;
 
-            label1.Text = "harmless : " + stats.Harmless;
-            label2.Text = "type-unsupported : " + stats.TypeUnsupported;
-            label3.Text = "suspicious : " + stats.Suspicious;
-            label4.Text = "confirmed-timeout : " + stats.ConfirmedTimeout;
-            label5.Text = "timeout : " + stats.Timeout;
-            label6.Text = "failure : " + stats.Failure;
-            label7.Text = "malicious : " + stats.Malicious;
-            label8.Text = "undetected : " + stats.Undetected;
-            label_result.Text = "Scan Success!";
+                label1.Text = "harmless : " + stats.Harmless;
+                label2.Text = "type-unsupported : " + stats.TypeUnsupported;
+                label3.Text = "suspicious : " + stats.Suspicious;
+                label4.Text = "confirmed-timeout : " + stats.ConfirmedTimeout;
+                label5.Text = "timeout : " + stats.Timeout;
+                label6.Text = "failure : " + stats.Failure;
+                label7.Text = "malicious : " + stats.Malicious;
+                label8.Text = "undetected : " + stats.Undetected;
+                label_result.Text = "Scan Success!";
 
-            DrawPieChart(chart1, (int)stats.Harmless, (int)stats.TypeUnsupported, (int)stats.Suspicious, (int)stats.ConfirmedTimeout, (int)stats.Timeout, (int)stats.Failure, (int)stats.Malicious, (int)stats.Undetected);
+                DrawPieChart(chart1, (int)stats.Harmless, (int)stats.TypeUnsupported, (int)stats.Suspicious, (int)stats.ConfirmedTimeout, (int)stats.Timeout, (int)stats.Failure, (int)stats.Malicious, (int)stats.Undetected);
+
+            } catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

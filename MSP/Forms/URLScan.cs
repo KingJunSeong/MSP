@@ -13,6 +13,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MSP.Forms
 {
@@ -74,16 +75,47 @@ namespace MSP.Forms
             using var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var body = await response.Content.ReadAsStringAsync();
-            
-            var res = JsonConvert.DeserializeObject<URLResponse>(body);
-            var stats = res.Data.Attributes.LastAnalysisStats;
-            
-            label1.Text = "harmless : " + stats.Harmless;
-            label3.Text = "suspicious : " + stats.Suspicious;
-            label5.Text = "timeout : " + stats.Timeout;
-            label7.Text = "malicious : " + stats.Malicious;
-            label8.Text = "undetected : " + stats.Undetected;
-            label_result.Text = "Scan Success!";
+
+            try
+            {
+                var res = JsonConvert.DeserializeObject<URLResponse>(body);
+                var stats = res.Data.Attributes.LastAnalysisStats;
+
+                label1.Text = "harmless : " + stats.Harmless;
+                label3.Text = "suspicious : " + stats.Suspicious;
+                label5.Text = "timeout : " + stats.Timeout;
+                label7.Text = "malicious : " + stats.Malicious;
+                label8.Text = "undetected : " + stats.Undetected;
+                label_result.Text = "Scan Success!";
+
+                DrawPieChart(chart1, (int)stats.Harmless, (int)stats.Suspicious, (int)stats.Timeout, (int)stats.Malicious, (int)stats.Undetected);
+            } catch(Exception err)
+            {
+                MessageBox.Show(err.Message);
+            } 
+        }
+
+        private void DrawPieChart(Chart chart, int value1, int value2, int value3, int value4, int value5)
+        {
+
+            chart.Series.Clear();
+            chart.Legends.Clear();
+            chart.Legends.Add("MyLegend");
+            chart.Legends[0].LegendStyle = LegendStyle.Table;
+            chart.Legends[0].Docking = Docking.Right;
+            chart.Legends[0].Alignment = StringAlignment.Center;
+            chart.Legends[0].BorderColor = Color.Black;
+
+            string seriesname = "MySeriesName";
+            chart.Series.Add(seriesname);
+
+            chart.Series[seriesname].ChartType = SeriesChartType.Pie;
+
+            if (0 < value1) chart.Series[seriesname].Points.AddXY("harmless", value1);
+            if (0 < value2) chart.Series[seriesname].Points.AddXY("suspicious", value2);
+            if (0 < value3) chart.Series[seriesname].Points.AddXY("timeout", value3);
+            if (0 < value4) chart.Series[seriesname].Points.AddXY("malicious", value4);
+            if (0 < value5) chart.Series[seriesname].Points.AddXY("undetected", value5);
         }
     }
 }
