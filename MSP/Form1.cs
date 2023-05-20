@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +19,10 @@ namespace MSP
         private int tempIndex;
         private Form activeForm;
 
-        Forms.Home home = new Forms.Home();
-        Forms.FileScan fileScan = new Forms.FileScan();
-        Forms.Setting setting = new Forms.Setting();
-        Forms.URLScan urlScan = new Forms.URLScan();
+        Forms.Home home = new();
+        Forms.FileScan fileScan = new();
+        Forms.Setting setting = new();
+        Forms.URLScan urlScan = new();
         public Form1()
         {
             InitializeComponent();
@@ -81,7 +82,7 @@ namespace MSP
             }
         }
 
-        private void OpenChildForm(Form childForm, object btnSender)
+        public void OpenChildForm(Form childForm, object btnSender)
         {
             if(activeForm != null)
             {
@@ -102,12 +103,12 @@ namespace MSP
             OpenChildForm(home, sender);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
             OpenChildForm(fileScan, sender);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void button2_Click(object sender, EventArgs e)
         {
             OpenChildForm(urlScan, sender);
         }

@@ -180,7 +180,7 @@
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(228, 104);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(530, 252);
+            this.chart1.Size = new System.Drawing.Size(504, 235);
             this.chart1.TabIndex = 19;
             this.chart1.Text = "chart1";
             // 

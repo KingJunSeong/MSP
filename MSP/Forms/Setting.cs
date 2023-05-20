@@ -12,6 +12,7 @@ namespace MSP.Forms
 {
     public partial class Setting : Form
     {
+        public static string apikey;
         public Setting()
         {
             InitializeComponent();

@@ -54,7 +54,6 @@ namespace MSP.Forms
                 MessageBox.Show("URL형식이 올바르지 않아요!");
                 return;
             }
-            MessageBox.Show("딱좋다.");
             label_result.Text = "Scanning...";
             string encodeingurl = urlEncoding.UrlEncode(textbox_url.Text);
             APIURLScan(encodeingurl);
@@ -81,6 +80,8 @@ namespace MSP.Forms
                 var res = JsonConvert.DeserializeObject<URLResponse>(body);
                 var stats = res.Data.Attributes.LastAnalysisStats;
 
+
+                //아이 역겨워
                 label1.Text = "harmless : " + stats.Harmless;
                 label3.Text = "suspicious : " + stats.Suspicious;
                 label5.Text = "timeout : " + stats.Timeout;
