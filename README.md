@@ -1,6 +1,9 @@
 # MSP
 Malware Scan Project
 <br>
+# Plan
+We are planning to implement the inspection log on the main.
+<br>
 
 # how to use?
 1. Prepare your virustotal API key
