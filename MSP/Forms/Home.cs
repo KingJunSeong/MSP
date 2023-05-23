@@ -16,6 +16,10 @@ namespace MSP.Forms
         public Home()
         {
             InitializeComponent();
+
+            textBox1.ScrollBars = ScrollBars.Both;
+            textBox1.Select(textBox1.Text.Length, 0);
+            textBox1.ScrollToCaret();
         }
         private void LoadTheme()
         {

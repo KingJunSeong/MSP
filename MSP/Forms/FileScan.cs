@@ -3,6 +3,7 @@ using MSP.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -106,18 +107,31 @@ namespace MSP.Forms
                 label_result.Text = "Scan Success!";
 
                 DrawPieChart(chart1, (int)stats.Harmless, (int)stats.TypeUnsupported, (int)stats.Suspicious, (int)stats.ConfirmedTimeout, (int)stats.Timeout, (int)stats.Failure, (int)stats.Malicious, (int)stats.Undetected);
-
+                Print_FileScanLog(textbox_filePath.Text);
             } catch (Exception err)
             {
                 MessageBox.Show(err.Message);
+                Print_FileScanLog(textbox_filePath.Text);
             }
         }
-
+        private void Print_FileScanLog(string filepath)
+        {
+            var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MSP");
+            var logfile = folder + @"\log.txt";
+            DirectoryInfo dir = new DirectoryInfo(folder);
+            if(dir.Exists == false)
+            {
+                dir.Create();
+            }
+            string datetime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            using var writer = new StreamWriter(logfile, append: true);
+            writer.WriteLine($"{datetime} - {filepath}");
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(FileHash.Getmd5FromFiles(textbox_filePath.Text));
             MessageBox.Show("Copyed!");
-        }
+        }   
 
         private void DrawPieChart(Chart chart, int value1, int value2, int value3, int value4, int value5, int value6, int value7, int value8)
         {

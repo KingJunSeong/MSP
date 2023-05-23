@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection.Emit;
@@ -80,8 +81,6 @@ namespace MSP.Forms
                 var res = JsonConvert.DeserializeObject<URLResponse>(body);
                 var stats = res.Data.Attributes.LastAnalysisStats;
 
-
-                //아이 역겨워
                 label1.Text = "harmless : " + stats.Harmless;
                 label3.Text = "suspicious : " + stats.Suspicious;
                 label5.Text = "timeout : " + stats.Timeout;
@@ -90,10 +89,24 @@ namespace MSP.Forms
                 label_result.Text = "Scan Success!";
 
                 DrawPieChart(chart1, (int)stats.Harmless, (int)stats.Suspicious, (int)stats.Timeout, (int)stats.Malicious, (int)stats.Undetected);
+                Print_URLScanLog(url);
             } catch(Exception err)
             {
                 MessageBox.Show(err.Message);
             } 
+        }
+        private void Print_URLScanLog(string URL)
+        {
+            var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MSP");
+            var logfile = folder + @"\log.txt";
+            DirectoryInfo dir = new DirectoryInfo(folder);
+            if (dir.Exists == false)
+            {
+                dir.Create();
+            }
+            string datetime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            using var writer = new StreamWriter(logfile, append: true);
+            writer.WriteLine($"{datetime} - {URL}");
         }
 
         private void DrawPieChart(Chart chart, int value1, int value2, int value3, int value4, int value5)
