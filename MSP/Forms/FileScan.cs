@@ -107,14 +107,14 @@ namespace MSP.Forms
                 label_result.Text = "Scan Success!";
 
                 DrawPieChart(chart1, (int)stats.Harmless, (int)stats.TypeUnsupported, (int)stats.Suspicious, (int)stats.ConfirmedTimeout, (int)stats.Timeout, (int)stats.Failure, (int)stats.Malicious, (int)stats.Undetected);
-                Print_FileScanLog(textbox_filePath.Text);
+                Print_FileScanLog(textbox_filePath.Text, "Success");
             } catch (Exception err)
             {
                 MessageBox.Show(err.Message);
-                Print_FileScanLog(textbox_filePath.Text);
+                Print_FileScanLog(textbox_filePath.Text, "Failed");
             }
         }
-        private void Print_FileScanLog(string filepath)
+        private void Print_FileScanLog(string filepath, string result)
         {
             var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MSP");
             var logfile = folder + @"\log.txt";
@@ -125,7 +125,7 @@ namespace MSP.Forms
             }
             string datetime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             using var writer = new StreamWriter(logfile, append: true);
-            writer.WriteLine($"{datetime} - {filepath}");
+            writer.WriteLine($"{datetime} - {filepath}, {result}");
         }
         private void button3_Click(object sender, EventArgs e)
         {

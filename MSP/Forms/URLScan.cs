@@ -89,7 +89,7 @@ namespace MSP.Forms
                 label_result.Text = "Scan Success!";
 
                 DrawPieChart(chart1, (int)stats.Harmless, (int)stats.Suspicious, (int)stats.Timeout, (int)stats.Malicious, (int)stats.Undetected);
-                Print_URLScanLog(url);
+                Print_URLScanLog(textbox_url.Text);
             } catch(Exception err)
             {
                 MessageBox.Show(err.Message);
