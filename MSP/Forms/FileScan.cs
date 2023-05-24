@@ -118,7 +118,7 @@ namespace MSP.Forms
         {
             var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\MSP");
             var logfile = folder + @"\log.txt";
-            DirectoryInfo dir = new DirectoryInfo(folder);
+            DirectoryInfo dir = new(folder);
             if(dir.Exists == false)
             {
                 dir.Create();

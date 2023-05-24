@@ -22,10 +22,12 @@ namespace MSP.Forms
 
             textBox1.ScrollBars = ScrollBars.Both;
 
-            FileSystemWatcher fileSystemWatcher = new();
-            fileSystemWatcher.Path = folder;
-            fileSystemWatcher.Filter = "log.txt";
-            fileSystemWatcher.EnableRaisingEvents = true;
+            FileSystemWatcher fileSystemWatcher = new()
+            {
+                Path = folder,
+                Filter = "log.txt",
+                EnableRaisingEvents = true
+            };
             fileSystemWatcher.Changed += new FileSystemEventHandler(ReadLogFile);
         }
         private void LoadTheme()
@@ -41,7 +43,6 @@ namespace MSP.Forms
                 }
             }
         }
-        private object _lockObj = new ();
         private void Home_Load(object sender, EventArgs e)
         {
             LoadTheme();
