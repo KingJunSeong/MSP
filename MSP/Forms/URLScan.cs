@@ -61,23 +61,23 @@ namespace MSP.Forms
         }
         public async Task APIURLScan(string url)
         {
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
+            try
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://www.virustotal.com/api/v3/urls/{url}"),
-                Headers =
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri($"https://www.virustotal.com/api/v3/urls/{url}"),
+                    Headers =
                 {
                     { "accept", "application/json" },
                     { "x-apikey", $"{APIKey.apikey}" },
                 },
-            };
-            using var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var body = await response.Content.ReadAsStringAsync();
+                };
+                using var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
 
-            try
-            {
                 var res = JsonConvert.DeserializeObject<URLResponse>(body);
                 var stats = res.Data.Attributes.LastAnalysisStats;
 

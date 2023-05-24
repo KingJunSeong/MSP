@@ -77,22 +77,23 @@ namespace MSP.Forms
 
         public async Task APIFileScan(string hash)
         {
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
+            try
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://www.virustotal.com/api/v3/files/{hash}"),
-                Headers =
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri($"https://www.virustotal.com/api/v3/files/{hash}"),
+                    Headers =
                 {
                     { "accept", "application/json" },
                     { "x-apikey", $"{APIKey.apikey}" },
                 },
-            };
-            using var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var body = await response.Content.ReadAsStringAsync();
-            try
-            {
+                };
+                using var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+
                 var res = JsonConvert.DeserializeObject<FileResponse>(body);
                 var stats = res.Data.Attributes.LastAnalysisStats;
 

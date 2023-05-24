@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using MSP.Forms;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MSP
@@ -23,6 +17,7 @@ namespace MSP
         Forms.FileScan fileScan = new();
         Forms.Setting setting = new();
         Forms.URLScan urlScan = new();
+
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +25,22 @@ namespace MSP
             this.Text = string.Empty;
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            Setting.Checkapiket += Setting_SettingChanged;
+            Setting.Editapiket += Setting_Editapiket;
+            btn_FileScan.Enabled = false;
+            btn_URLScan.Enabled = false;
+        }
+
+        private void Setting_Editapiket(object sender, EventArgs e)
+        {
+            btn_FileScan.Enabled = false;
+            btn_URLScan.Enabled = false;
+        }
+
+        private void Setting_SettingChanged(object sender, EventArgs e)
+        {
+            btn_FileScan.Enabled = true;
+            btn_URLScan.Enabled = true;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -41,7 +52,7 @@ namespace MSP
         private Color SelectThemeColor()
         {
             int index = random.Next(ThemeColor.ColorList.Count);
-            while(tempIndex == index)
+            while (tempIndex == index)
             {
                 index = random.Next(ThemeColor.ColorList.Count);
             }
@@ -52,9 +63,9 @@ namespace MSP
 
         private void ActivateButton(object btnSender)
         {
-            if(btnSender != null)
+            if (btnSender != null)
             {
-                if(currentButton != (Button)btnSender)
+                if (currentButton != (Button)btnSender)
                 {
                     DisableButton();
                     Color color = SelectThemeColor();
@@ -71,9 +82,9 @@ namespace MSP
         }
         private void DisableButton()
         {
-            foreach(Control previousBtn in panelMenu.Controls)
+            foreach (Control previousBtn in panelMenu.Controls)
             {
-                if(previousBtn.GetType() == typeof(Button))
+                if (previousBtn.GetType() == typeof(Button))
                 {
                     previousBtn.BackColor = Color.FromArgb(51, 51, 76);
                     previousBtn.ForeColor = Color.Gainsboro;
@@ -84,7 +95,7 @@ namespace MSP
 
         public void OpenChildForm(Form childForm, object btnSender)
         {
-            if(activeForm != null)
+            if (activeForm != null)
             {
                 activeForm.Hide();
             }
@@ -136,7 +147,7 @@ namespace MSP
 
         private void btn_Max_Click(object sender, EventArgs e)
         {
-            if(WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
                 this.WindowState = FormWindowState.Maximized;
             }
