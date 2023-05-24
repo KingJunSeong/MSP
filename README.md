@@ -2,7 +2,7 @@
 Malware Scan Project
 <br>
 # Plan
-We are planning to implement the inspection log on the main.
+I'm planning to implement the Setting form.
 <br>
 
 # how to use?
