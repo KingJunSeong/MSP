@@ -61,12 +61,18 @@ namespace MSP.Forms
                         button1.Enabled = false;
                         button2.Enabled = true;
                         MessageBox.Show("키가 유효합니다.");
+                        apikey = textBox1.Text;
                     }
                     else
                     {
                         //api키 재입력
                         MessageBox.Show("유효하지 않는 키 입니다. 다시 입력해주세요");
                     }
+                }
+                else
+                {
+                    //api키 재입력
+                    MessageBox.Show("유효하지 않는 키 입니다. 다시 입력해주세요");
                 }
             }
         }

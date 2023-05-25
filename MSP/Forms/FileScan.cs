@@ -112,7 +112,9 @@ namespace MSP.Forms
             } catch (Exception err)
             {
                 MessageBox.Show(err.Message);
+                label_result.Text = "Failed";
                 Print_FileScanLog(textbox_filePath.Text, "Failed");
+                
             }
         }
         private void Print_FileScanLog(string filepath, string result)
