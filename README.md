@@ -2,7 +2,7 @@
 Malware Scan Project
 <br>
 # Plan
-I'm planning to implement the Setting form.
+I am planning to find various bugs and errors and solve them.
 <br>
 
 # how to use?
