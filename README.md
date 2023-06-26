@@ -2,12 +2,13 @@
 Malware Scan Project
 <br>
 # Plan
-I'm planning to implement the Setting form.
+I am planning to find various bugs and errors and solve them.
 <br>
 
 # how to use?
-1. Prepare your virustotal API key
-2. Input it in the Utils.apikey file
-
-![image](https://user-images.githubusercontent.com/82876235/232652401-5212a2a2-b522-46b6-a906-6bb2d0680142.png)
+link => https://www.virustotal.com/
+1. Log in from VirusTotal.com and get an API key. 
+2. Insert the API KEY into the text box.
+3. Press the Check Key button to verify that the key is valid.
+![image](https://github.com/KingJunSeong/MalwareScan/assets/82876235/0c629103-bdf6-42f9-98f9-d821df659167)
 <br> ↑ here ↑
