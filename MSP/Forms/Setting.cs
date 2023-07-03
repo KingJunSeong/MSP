@@ -55,7 +55,6 @@ namespace MSP.Forms
 
                     if (jObject.Property("error") == null)
                     {
-                        //api키 유효
                         Checkapiket(null, EventArgs.Empty);
                         textBox1.Enabled = false;
                         button1.Enabled = false;
@@ -65,13 +64,11 @@ namespace MSP.Forms
                     }
                     else
                     {
-                        //api키 재입력
                         MessageBox.Show("유효하지 않는 키 입니다. 다시 입력해주세요");
                     }
                 }
                 else
                 {
-                    //api키 재입력
                     MessageBox.Show("유효하지 않는 키 입니다. 다시 입력해주세요");
                 }
             }

@@ -13,10 +13,10 @@ namespace MSP
         private int tempIndex;
         private Form activeForm;
 
-        Forms.Home home = new();
-        Forms.FileScan fileScan = new();
-        Forms.Setting setting = new();
-        Forms.URLScan urlScan = new();
+        Home home = new();
+        FileScan fileScan = new();
+        Setting setting = new();
+        URLScan urlScan = new();
 
         public Form1()
         {

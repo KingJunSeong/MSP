@@ -92,6 +92,7 @@ namespace MSP.Forms
             } catch(Exception err)
             {
                 MessageBox.Show(err.Message);
+                label_result.Text = "Failed";
             } 
         }
         private void Print_URLScanLog(string URL)
